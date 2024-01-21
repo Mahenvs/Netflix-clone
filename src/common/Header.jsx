@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { NETFLIX_LOGO_URL } from "../utils/constants";
-import LogOutURL from "../../src/logOutLogo.png";
+// import LogOutURL from "../../src/logOutLogo.png";
 import lang from "./languageConstants.js";
 import FindingMovies from "./FindingMovies";
 import LangSelection from "./LangSelection";
@@ -58,11 +58,12 @@ const Header = () => {
     <div className=" px-1 py-3 bg-gradient-to-b from-black z-20 w-full flex md:flex-row justify-between absolute  
                     md:px-6 md:py-2 ">
       <div className=" gap-3 flex md:gap-12">
-        <img
+        {/* <img
           className="w-[7rem] md:w-[10rem] "
-          src={NETFLIX_LOGO_URL}
+          src={Netflix_Logo}
           alt="NETFLIX LOGO"
-        />
+        /> */}
+        <h2 className="text-red-700 text-4xl font-bold w-[7rem] md:w-[10rem] ">PLAYFLIX</h2>
         {user && (
         <ul className="hidden md:flex gap-6 self-center ">
           {lang[appLang].home.map((list) => (
@@ -84,13 +85,14 @@ const Header = () => {
           </span>
 
           <span className="text-white cursor-pointer flex  md:relative   md:mt-0">
-            <img
+            {/* <img
               src={LogOutURL}
               className="w-6 md:w-10 flex self-end"
               alt="LogOut"
               onClick={() => setVisible(!isVisible)}
-            />
-
+            /> */}
+             <p className="w-6 md:w-10  text-3xl flex self-end" onClick={() => setVisible(!isVisible)}>
+             {isVisible ? "🙂" : "😕"}</p>
             {/* display the below only when the profile is clicked */}
             <span
               className={
