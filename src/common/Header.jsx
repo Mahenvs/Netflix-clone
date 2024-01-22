@@ -58,11 +58,6 @@ const Header = () => {
     <div className=" px-1 py-3 bg-gradient-to-b from-black z-20 w-full flex md:flex-row justify-between absolute  
                     md:px-6 md:py-2 ">
       <div className=" gap-3 flex md:gap-12">
-        {/* <img
-          className="w-[7rem] md:w-[10rem] "
-          src={Netflix_Logo}
-          alt="NETFLIX LOGO"
-        /> */}
         <h2 className="text-red-700 text-4xl font-bold w-[7rem] md:w-[10rem] ">PLAYFLIX</h2>
         {user && (
         <ul className="hidden md:flex gap-6 self-center ">

@@ -9,9 +9,6 @@ const ErrorComponent = () => {
   return (
     <div>
       <Header />
-      {/* <div > */}
-
-      {/* </div> */}
       <div className="absolute ">
         <img src={NETFLIX_BODY_URL} alt="NETFLIX BACKGROUND" />
         <h1 className="relative w-1/2 z-20 -mt-[40%] text-5xl text-white mx-auto   rounded-[10px] bg-[#d9232e]">

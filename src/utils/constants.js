@@ -1,5 +1,5 @@
-// export const NETFLIX_LOGO_URL = "../assets/Netflix_Logo.png";
-export const NETFLIX_BODY_URL = "https://assets.nflxext.com/ffe/siteui/vlv3/b8dd5151-d491-4e91-b1fb-a19df70df5fc/d46403c9-f9cb-4151-b179-70cec1ccdba6/US-en-20240102-trifectadaily-perspective_alpha_website_large.jpg";
+import background from '../assets/Background.jpg'
+export const NETFLIX_BODY_URL = background;
 export const POSTER_URL = "https://image.tmdb.org/t/p/w500/";
 
 export const API_OPTIONS = {
