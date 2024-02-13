@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import VideoTitle from "./VideoTitle";
 import { useSelector } from "react-redux";
 import GetVideoBackground from "./GetVideoBackground";
@@ -6,19 +6,29 @@ import GetVideoBackground from "./GetVideoBackground";
 const MainContainer = () => {
   const movies = useSelector((store) => store.movies?.nowPlayingMovies);
   const [isPlaying, setPlaying] = useState(true);
+  const selectedMovie = useSelector((store) => store.movies?.selectedMovie);
   
+  useEffect(()=>{
+    
+  },[selectedMovie])
   const handlePlay = () =>{
     setPlaying(!isPlaying)
   }
+  let mainMovie;
+  console.log(movies);
+  if (!movies) {
+    // console.log("2010 ");
+    // mainMovie = selectedMovie ;
+    return;
+  }
+  else 
+     mainMovie = movies[0];
   
-  if (!movies) return;
-
-  const mainMovie = movies[0];
-  
+     if(selectedMovie != null)
+     mainMovie = selectedMovie ;
   const { original_title, overview, poster_path, id } = mainMovie;
   
 
-  
   return (
     <div className="">
       <VideoTitle onPlayHandle={handlePlay} title={original_title} overview={overview} poster_path = {poster_path} isPlaying={isPlaying}/>

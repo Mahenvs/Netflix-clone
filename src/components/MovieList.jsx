@@ -13,6 +13,7 @@ const MovieList = ({ title, movies }) => {
               key={movie.id}
               name={movie?.original_title}
               poster={POSTER_URL + movie?.poster_path}
+              id={movie}
             />
           ))}
         </div>

@@ -16,7 +16,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const [toggleSignIn, setToggleSignIn] = useState(true);
-  const [errorMsg, setErroMsg] = useState(false);
+  const [errorMsg, setErroMsg] = useState(true);
 
   const toggleSignUp = () => {
     email.current.value = "";
@@ -30,15 +30,21 @@ const Login = () => {
 
   const onSignInHandler = (e) => {
     e.preventDefault();
-
+    console.log("inside ",email.current.value,password.current.value);
     let validationStatus = validate(
       email.current.value,
       password.current.value
     );
-    setErroMsg(validationStatus);
+    console.log(validationStatus);
+    if(validationStatus != null){
+      setErroMsg(validationStatus)
+    }
+    else
+      setErroMsg(validationStatus);
 
-    if (errorMsg) return;
-
+      console.log(errorMsg);
+    if (!errorMsg) return;
+    if(validationStatus == null)
     if (!toggleSignIn)
       createUserWithEmailAndPassword(
         auth,
@@ -61,7 +67,8 @@ const Login = () => {
           setErroMsg(errorMessage)
           
         });
-    else {
+    else { 
+      // console.log();
       signInWithEmailAndPassword(
         auth,
         email.current.value,
@@ -96,9 +103,9 @@ const Login = () => {
       </div>
       <form
         action=""
-        className="bg-[black] w-full absolute right-0 left-0 mx-auto pb-6 px-16 
+        className="bg-[black] w-full absolute right-0 left-0 mx-auto  px-16 
          pt-8 my-36 flex flex-col justify-center content-center bg-opacity-80  
-         md:pt-12 md:w-4/12 md:pb-16"
+         md:pt-12 md:w-4/12 md:pb-1"
       >
         <h2 className="text-3xl text-[white] font-semibold just py-4">
           {toggleSignIn ? "Sign In" : "Sign Up"}
@@ -134,7 +141,7 @@ const Login = () => {
         </button>
         <div className="text-[#959595] flex justify-between ">
           <div className="flex gap-1">
-            <input type="checkbox" className="bg-gray-100 " /> Remember me
+            {/* <input type="checkbox" className="bg-gray-100 " /> Remember me */}
           </div>
           <button>Need help?</button>
         </div>
