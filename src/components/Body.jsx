@@ -1,37 +1,24 @@
 import React from "react";
+import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 import Login from "./Login";
 import Browse from "./Browse";
-import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
-import ErrorComponent from "../common/ErrorComponent";
+import { Provider } from "react-redux";
+import appStore from "../utils/appStore";
 
 const Body = () => {
   const routes = createBrowserRouter([
-    {
-      path: "/",
-      element: <Login />,
-      // errorElement: <ErrorComponent />,
-    },
-    {
-      path: "/home",
-      element: <Browse />,
-      // errorElement: <ErrorComponent />,
-    },
-    {
-      path: "/browse",
-      element: <Browse />,
-      
-    },
-    {
-      path: "/login",
-      element: <Login />,
-
-      // errorElement: <ErrorComponent />,
-    },
+    { path: "/", element: <Login /> },
+    { path: "home", element: <Browse /> },
+    { path: "browse", element: <Browse /> },
+    { path: "login", element: <Login /> },
   ]);
+
   return (
-    <RouterProvider router={routes}>
-      <Outlet />
-    </RouterProvider>
+    <Provider store={appStore}>
+      <RouterProvider router={routes}>
+        <Outlet />
+      </RouterProvider>
+    </Provider>
   );
 };
 

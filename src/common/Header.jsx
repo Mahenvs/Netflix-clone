@@ -63,7 +63,6 @@ const Header = () => {
         <ul className="hidden md:flex gap-6 self-center ">
           {lang[appLang].home.map((list) => (
             <Link
-              to={list}
               key={list}
               className={"z-20 text-lg text-white flex cursor-pointer "}
             >
