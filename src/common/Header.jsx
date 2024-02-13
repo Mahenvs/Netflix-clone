@@ -32,7 +32,7 @@ const Header = () => {
             email,
           })
         );
-        navigate("/home");
+        navigate("/browse");
       } else {
         // User is signed out
         // ...
