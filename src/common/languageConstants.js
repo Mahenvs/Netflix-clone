@@ -6,7 +6,8 @@ const lang = {
         trending: "Trending",
         upComing: "UpComing",
         found_Movies:"Found Movies",
-        log_out:"Log Out"
+        log_out:"Log Out",
+        log_in:"Log In"
     },
     hindi: {
         search:"कोई फ़िल्म खोजें",
@@ -15,7 +16,8 @@ const lang = {
         trending: "रुझान",
         upComing: "आगामी",
         found_Movies:"फिल्में मिलीं",
-        log_out:"लॉग आउट"
+        log_out:"लॉग आउट",
+        log_in:"लॉग इन"
     },
     telugu: {
         search: "సినిమాని కనుగొనండి",
@@ -24,7 +26,8 @@ const lang = {
         trending: "ట్రెండింగ్",
         upComing: "రాబోయేది",
         found_Movies:"సినిమాలు దొరికాయి",
-        log_out:"లాగ్ అవుట్"
+        log_out:"లాగ్ అవుట్",
+        log_in:"లాగిన్"
     }
 }
 

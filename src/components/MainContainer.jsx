@@ -7,38 +7,40 @@ const MainContainer = () => {
   const movies = useSelector((store) => store.movies?.nowPlayingMovies);
   const [isPlaying, setPlaying] = useState(true);
   const selectedMovie = useSelector((store) => store.movies?.selectedMovie);
-  
-  useEffect(()=>{
-    
-  },[selectedMovie])
-  const handlePlay = () =>{
-    setPlaying(!isPlaying)
-  }
+
+  useEffect(() => {}, [selectedMovie]);
+  const handlePlay = () => {
+    setPlaying(!isPlaying);
+  };
   let mainMovie;
-  console.log(movies);
   if (!movies) {
-    // console.log("2010 ");
-    // mainMovie = selectedMovie ;
     return;
+  } else {
+    mainMovie = movies[0];
   }
-  else 
-     mainMovie = movies[0];
-  
-     if(selectedMovie != null)
-     mainMovie = selectedMovie ;
+  // localStorage.setItem("mainMovie", JSON.stringify(mainMovie));
+
+  if (selectedMovie != null) {
+    mainMovie = selectedMovie;
+  }
   const { original_title, overview, poster_path, id } = mainMovie;
-  
 
   return (
     <div className="">
-      <VideoTitle onPlayHandle={handlePlay} title={original_title} overview={overview} poster_path = {poster_path} isPlaying={isPlaying}/>
+      <VideoTitle
+        onPlayHandle={handlePlay}
+        title={original_title}
+        overview={overview}
+        poster_path={poster_path}
+        isPlaying={isPlaying}
+      />
       {/* <VideoTitle
         title={trailer?.name}
         overview={trailer?.overview}
         poster_path={poster_path}
       /> */}
       {/* <VideoTitle title={trailer?.name} /> */}
-      <GetVideoBackground movieId={id} isPlaying={isPlaying}/>
+      <GetVideoBackground movieId={id} isPlaying={isPlaying} />
     </div>
   );
 };

@@ -11,18 +11,22 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { NETFLIX_BODY_URL } from "../utils/constants";
 
+const allowedUrls = ["/browse", "/home", "/profile"]; // Add allowed URLs here
+
+const isValidUrl = (url) => allowedUrls.includes(url);
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [toggleSignIn, setToggleSignIn] = useState(true);
-  const [errorMsg, setErroMsg] = useState(true);
+  const [errorMsg, setErroMsg] = useState("");
 
   const toggleSignUp = () => {
     email.current.value = "";
-    password.current.value = null;
-    setErroMsg(false);
-    setToggleSignIn(!toggleSignIn);
+    password.current.value = "";
+    setErroMsg("");
+    setToggleSignIn((prev) => !prev);
   };
 
   const email = useRef();
@@ -30,68 +34,82 @@ const Login = () => {
 
   const onSignInHandler = (e) => {
     e.preventDefault();
-    console.log("inside ",email.current.value,password.current.value);
+    setErroMsg("");
+    console.log(
+      toggleSignIn,
+      "inside ",
+      email.current.value,
+      password.current.value
+    );
     let validationStatus = validate(
       email.current.value,
       password.current.value
     );
     console.log(validationStatus);
-    if(validationStatus != null){
-      setErroMsg(validationStatus)
-    }
-    else
+    if (validationStatus != null) {
+      alert(validationStatus);
       setErroMsg(validationStatus);
+      return;
+    }
 
-      console.log(errorMsg);
-    if (!errorMsg) return;
-    if(validationStatus == null)
-    if (!toggleSignIn)
-      createUserWithEmailAndPassword(
-        auth,
-        email.current.value,
-        password.current.value
-      )
-        .then((userCredential) => {
-          dispatch(
-            addUser({
-              email: userCredential.user.email,
-              uid: userCredential.user.uid,
-              displayName: userCredential.user.displayName,
-            })
-          );
+    console.log(errorMsg);
+    if (errorMsg) return;
+    if (validationStatus == null) {
+      console.log(toggleSignIn);
 
-          navigate("/browse");
-        })
-        .catch((error) => {
-          const errorMessage = error.message;
-          setErroMsg(errorMessage)
-          
-        });
-    else { 
-      // console.log();
-      signInWithEmailAndPassword(
-        auth,
-        email.current.value,
-        password.current.value
-      )
-        .then((userCredential) => {
-          
-          dispatch(
-            addUser({
-              email: userCredential.user.email,
-              uid: userCredential.user.uid,
-              displayName: userCredential.user.displayName,
-            })
-          );
+      if (!toggleSignIn)
+        createUserWithEmailAndPassword(
+          auth,
+          email.current.value,
+          password.current.value
+        )
+          .then((userCredential) => {
+            dispatch(
+              addUser({
+                email: userCredential.user.email,
+                uid: userCredential.user.uid,
+                displayName: userCredential.user.displayName,
+              })
+            );
 
-          navigate("/browse");
-          // ...
-        })
-        .catch((error) => {
-          const errorMessage = error.message;
-          setErroMsg(errorMessage)
-          
-        });
+            if (isValidUrl("/browse")) {
+              navigate("/browse");
+            } else {
+              console.error("Invalid redirection URL");
+            }
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            setErroMsg(errorMessage);
+            alert(errorMessage);
+          });
+      else {
+        signInWithEmailAndPassword(
+          auth,
+          email.current.value,
+          password.current.value
+        )
+          .then((userCredential) => {
+            dispatch(
+              addUser({
+                email: userCredential.user.email,
+                uid: userCredential.user.uid,
+                displayName: userCredential.user.displayName,
+              })
+            );
+
+            if (isValidUrl("/browse")) {
+              navigate("/browse");
+            } else {
+              console.error("Invalid redirection URL");
+            }
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            setErroMsg(errorMessage);
+            alert(errorMessage);
+          });
+      }
     }
   };
 
@@ -99,7 +117,11 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute ">
-        <img src={NETFLIX_BODY_URL} alt="NETFLIX BACKGROUND" className="h-screen w-screen object-cover" />
+        <img
+          src={NETFLIX_BODY_URL}
+          alt="NETFLIX BACKGROUND"
+          className="h-screen w-screen object-cover"
+        />
       </div>
       <form
         action=""
